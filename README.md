@@ -375,3 +375,254 @@ test('Vpc', () => {
     });
 });
 ```
+
+# 実践！AWS CDK #7 ファイル分割
+参考URL:https://dev.classmethod.jp/articles/cdk-practice-7-split-file/
+
+### 学び
+* リソースを定義するクラスを作り、スタック作成用のファイルをスッキリさせる
+* リソースごとにクラス定義ファイルを分割する
+* リソースごとにテストファイルを分割する
+
+### 手順
+リソースのクラス作成用のファイルを作成  
+`mkdir lib/resource` 
+`cd lib/resource`  
+`touch vpc.ts subnet.ts`  
+
+
+VPCのクラスを定義する  
+`~/devio/lib/resource/vpc.ts`  
+```tsx
+import { Construct } from 'constructs';
+import { CfnVPC } from 'aws-cdk-lib/aws-ec2';
+
+export class Vpc {
+    public vpc: CfnVPC;
+
+    constructor() { };
+
+    public createResources(scope: Construct) {
+        const systemName = scope.node.tryGetContext('systemName');
+        const envType = scope.node.tryGetContext('envType');
+
+        this.vpc = new CfnVPC(scope, 'Vpc', {
+            cidrBlock: '10.0.0.0/19',
+            tags: [{ key: 'Name', value: `${systemName}-${envType}-vpc` }]
+        });
+    }
+}
+```
+
+Subnetのクラスを定義する  
+`~/lib/resource/subnet.ts`  
+```tsx
+import { Stack, StackProps} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { CfnVPC,CfnSubnet } from 'aws-cdk-lib/aws-ec2';
+
+export class Subnet {
+    public PublicSubnetA: CfnSubnet;
+    public PublicSubnetC: CfnSubnet;
+    public PublicSubnetD: CfnSubnet;
+    public ProtectedSubnetA: CfnSubnet;
+    public ProtectedSubnetC: CfnSubnet;
+    public ProtectedSubnetD: CfnSubnet;
+    public PrivateSubnetA: CfnSubnet;
+    public PrivateSubnetC: CfnSubnet;
+    public PrivateSubnetD: CfnSubnet;
+
+    private readonly vpc: CfnVPC;
+
+    constructor(vpc: CfnVPC) {
+        this.vpc = vpc;
+    };
+
+    public createResources(scope: Construct) {
+        const systemName = scope.node.tryGetContext('systemName');
+        const envType = scope.node.tryGetContext('envType');
+
+        // サブネットのCIDRブロックを定義
+        const CIDR = ['10.0.0.0/24', '10.0.1.0/24','10.0.2.0/24','10.0.3.0/24',
+        '10.0.4.0/24','10.0.5.0/24','10.0.6.0/24','10.0.7.0/24',
+        '10.0.8.0/24','10.0.9.0/24','10.0.10.0/24','10.0.11.0/24'];
+
+        // サブネットのAZを定義
+        const AZ = ['ap-northeast-1a', 'ap-northeast-1c', 'ap-northeast-1d'];
+
+        this.PublicSubnetA = new CfnSubnet(scope,'PublicSubnetA',{
+        cidrBlock: CIDR[0],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[0],
+        tags: [{key:'Name',value:`${systemName}-${envType}-public-subnet-1a`}]
+        })
+        this.PublicSubnetC = new CfnSubnet(scope,'PublicSubnetC',{
+        cidrBlock: CIDR[1],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[1],
+        tags: [{key:'Name',value:`${systemName}-${envType}-public-subnet-1c`}]
+        })
+        this.PublicSubnetD = new CfnSubnet(scope,'PublicSubnetD',{
+        cidrBlock: CIDR[2],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[2],
+        tags: [{key:'Name',value:`${systemName}-${envType}-public-subnet-1d`}]
+        })
+        this.ProtectedSubnetA = new CfnSubnet(scope,'ProtectedSubnetA',{
+        cidrBlock: CIDR[4],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[0],
+        tags: [{key:'Name',value:`${systemName}-${envType}-protected-subnet-1a`}]
+        })
+        this.ProtectedSubnetC = new CfnSubnet(scope,'ProtectedSubnetC',{
+        cidrBlock: CIDR[5],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[1],
+        tags: [{key:'Name',value:`${systemName}-${envType}-protected-subnet-1c`}]
+        })
+        this.ProtectedSubnetD = new CfnSubnet(scope,'ProtectedSubnetD',{
+        cidrBlock: CIDR[6],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[2],
+        tags: [{key:'Name',value:`${systemName}-${envType}-protected-subnet-1d`}]
+        })
+        this.PrivateSubnetA = new CfnSubnet(scope,'PrivateSubnetA',{
+        cidrBlock: CIDR[8],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[0],
+        tags: [{key:'Name',value:`${systemName}-${envType}-private-subnet-1a`}]
+        })
+        this.PrivateSubnetC = new CfnSubnet(scope,'PrivateSubnetC',{
+        cidrBlock: CIDR[9],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[1],
+        tags: [{key:'Name',value:`${systemName}-${envType}-private-subnet-1c`}]
+        })
+        this.PrivateSubnetD = new CfnSubnet(scope,'PrivateSubnetD',{
+        cidrBlock: CIDR[10],
+        vpcId: this.vpc.ref,
+        availabilityZone: AZ[2],
+        tags: [{key:'Name',value:`${systemName}-${envType}-private-subnet-1d`}]
+        })
+    }
+}
+```
+
+スタックを作成  
+`~/devio/lib/devio-stack.ts`  
+```tsx
+import { Stack, StackProps} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { Vpc } from './resource/vpc';
+import { Subnet } from './resource/subnet';
+
+export class DevioStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
+    super(scope, id, props);
+
+    const vpc = new Vpc();
+    vpc.createResources(this);
+
+    const subnet = new Subnet(vpc.vpc);
+    subnet.createResources(this);
+  }
+}
+```
+
+テスト用のファイルを作成  
+
+`mkdir test/resources`  
+`cd test/resource`   
+`touch vpc.test.ts subnet.test.ts`  
+
+`~/devio/test/resources/vpc.test.ts`  
+```tsx
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as Devio from '../../lib/devio-stack';
+import {systemName,envType} from '../env';
+
+test('Vpc', () => {
+    const app = new cdk.App({
+      context: {
+          'systemName': 'devio',
+          'envType': 'stg'
+      }
+  });
+    const stack = new Devio.DevioStack(app, 'DevioStack');
+    const template = Template.fromStack(stack);
+  
+    template.resourceCountIs('AWS::EC2::VPC', 1);
+    template.hasResourceProperties('AWS::EC2::VPC',{
+        "CidrBlock": "10.0.0.0/19",
+        "Tags": [{'Key': 'Name', 'Value': `${systemName}-${envType}-vpc`}]
+    });
+});
+```
+
+`~/devio/test/resources/subnet.test.ts`  
+```tsx
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as Devio from '../../lib/devio-stack';
+import {systemName,envType} from '../env';
+
+test('Subnet', () => {
+    const app = new cdk.App({
+      context: {
+          'systemName': 'devio',
+          'envType': 'stg'
+      }
+  });
+    const stack = new Devio.DevioStack(app, 'DevioStack');
+    const template = Template.fromStack(stack);
+  
+    template.resourceCountIs('AWS::EC2::Subnet', 9);
+
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.0.0/24',
+        "AvailabilityZone": 'ap-northeast-1a',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1a` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.1.0/24',
+        "AvailabilityZone": 'ap-northeast-1c',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1c` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.2.0/24',
+        "AvailabilityZone": 'ap-northeast-1d',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1d` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.4.0/24',
+        "AvailabilityZone": 'ap-northeast-1a',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1a` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.5.0/24',
+        "AvailabilityZone": 'ap-northeast-1c',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1c` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.6.0/24',
+        "AvailabilityZone": 'ap-northeast-1d',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1d` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.8.0/24',
+        "AvailabilityZone": 'ap-northeast-1a',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1a` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.9.0/24',
+        "AvailabilityZone": 'ap-northeast-1c',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1c` }]
+    });
+    template.hasResourceProperties('AWS::EC2::Subnet', {
+        "CidrBlock": '10.0.10.0/24',
+        "AvailabilityZone": 'ap-northeast-1d',
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1d` }]
+    });
+});
+```
