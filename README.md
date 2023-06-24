@@ -211,7 +211,7 @@ https://dev.classmethod.jp/articles/cdk-practice-5-subnet/
 `cdk.json`に以下を追記する
 ```json
 "systemName": "devio",
- "envType": "stg"
+"envType": "stg"
 ```
 
 
