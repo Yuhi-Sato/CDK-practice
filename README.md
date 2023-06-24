@@ -131,7 +131,7 @@ test('SQS Queue Created', () => {
 });
 ```
 
-テストを実行
+テストを実行  
 `npm run build && npm test`  
 
 以下のようにfailedと出力される
