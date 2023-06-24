@@ -1,14 +1,25 @@
-# Welcome to your CDK TypeScript project!
+# 実践！AWS CDK #1 導入(https://dev.classmethod.jp/articles/cdk-practice-1-introduction/)
+`npm install -g aws-cdk`
 
-This is a blank project for TypeScript development with CDK.
+`mkdir devio && cd devio`
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+`npx aws-cdk@1.104.0 init app --language typescrip`
 
-## Useful commands
+```tsx
+import * as cdk from '@aws-cdk/core';
+import { Vpc } from '@aws-cdk/aws-ec2'; // <- 追加
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+export class DevioStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    new Vpc(this, 'Vpc'); // <- 追加
+  }
+}
+```
+
+`cdk synth`
+
+`cdk deploy`
+
+`cdk destroy`
