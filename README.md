@@ -206,7 +206,9 @@ https://dev.classmethod.jp/articles/cdk-practice-5-subnet/
 
 ### 手順
 今回は以下の構成図を作っていきます
-![image](https://github.com/Yuhi-Sato/CDK-practice/assets/91863685/b3127991-1da1-47d8-af56-7a108df02238)
+![Untitled Diagram (1)](https://github.com/Yuhi-Sato/CDK-practice/assets/91863685/556e613d-5038-4900-95dd-5ef420f856fd)
+
+
 
 
 `~/devio/test/devio.test.ts`
