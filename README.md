@@ -120,6 +120,8 @@ Snapshots:   0 total
 Time:        4.758 s
 Ran all test suites.
 ```
+
+```tsx
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as Devio from '../lib/devio-stack';
@@ -136,4 +138,4 @@ test('Vpc', () => {
     });
 });
 
-```tsx
+```
