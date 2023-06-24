@@ -16,10 +16,10 @@ CDK をインストール
 ディレクトリを作成し、移動  
 `mkdir devio && cd devio`
 
-CDK をインストール
+CDK をインストール  
 `npx aws-cdk init app --language typescrip`
 
-CDKのバージョンを確認する
+CDKのバージョンを確認する  
 `cdk --version`
 
 バージョンがv2の場合、モジュールのインポート方法が異なるため注意(参考URLはv1)　　
