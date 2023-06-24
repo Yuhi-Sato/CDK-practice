@@ -1,13 +1,11 @@
-import * as cdk from '@aws-cdk/core';
-import { CfnVPC } from '@aws-cdk/aws-ec2';
+import { Stack, StackProps} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { Vpc } from 'aws-cdk-lib/aws-ec2'; // <- 追加
 
-export class DevioStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class DevioStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new CfnVPC(this, 'Vpc', {
-      cidrBlock: '10.0.0.0/19',
-      tags: [{ key: 'Name', value: 'devio-stg-vpc' }]
-    });
+    new Vpc(this, 'Vpc'); // <- 追加
   }
 }
