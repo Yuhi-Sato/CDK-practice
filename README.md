@@ -104,21 +104,10 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html
 `npm run build && npm test`
 
 ```
-> devio@0.1.0 build
-> tsc
-
-
-> devio@0.1.0 test
-> jest
-
- PASS  test/devio.test.ts
-  ✓ SQS Queue Created (1 ms)
-
-Test Suites: 1 passed, 1 total
-Tests:       1 passed, 1 total
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        4.758 s
-Ran all test suites.
+Time:        4.809 s, estimated 5 
 ```
 
 ```tsx
@@ -138,4 +127,12 @@ test('Vpc', () => {
     });
 });
 
+```
+
+`npm run build && npm test`
+```
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        5.421 s
 ```
