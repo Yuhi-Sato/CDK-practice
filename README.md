@@ -24,7 +24,7 @@ CDKのバージョンを確認する
 
 バージョンがv2の場合、モジュールのインポート方法が異なるため注意(参考URLはv1)　　
 
-~/devio/lib/devio-stack.ts
+`~/devio/lib/devio-stack.ts`
 ```tsx
 import { Stack, StackProps} from 'aws-cdk-lib'; // 変更
 import { Construct } from 'constructs'; // 変更
@@ -63,7 +63,7 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.CfnVPC.html
 ### 手順
 
 
-~/devio/lib/devio-stack.ts
+`~/devio/lib/devio-stack.ts`
 ```tsx
 import { Stack, StackProps} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
@@ -110,7 +110,7 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html
 ### 手順
 以下のように~/devio/test/devio.test.tsのコメントアウトを外す
 
-~/devio/test/devio.test.ts
+`~/devio/test/devio.test.ts`
 ```tsx
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
@@ -142,7 +142,7 @@ Snapshots:   0 total
 Time:        4.809 s, estimated 5 
 ```
 
-~/devio/test/devio.test.tsの以下の部分でAWS::SQS::Queueのリソースが存在するかをテストしているが、このリソースを~/devio/lib/devio-stack.tsで定義していないため、テストが失敗している
+\~/devio/test/devio.test.tsの以下の部分でAWS::SQS::Queueのリソースが存在するかをテストしているが、このリソースを\~/devio/lib/devio-stack.tsで定義していないため、テストが失敗している
 ```tsx
 template.hasResourceProperties('AWS::SQS::Queue', {
     VisibilityTimeout: 300
@@ -150,7 +150,7 @@ template.hasResourceProperties('AWS::SQS::Queue', {
 ```
 ~/devio/test/devio.test.tsを以下のように書き換える
 
-~/devio/test/devio.test.ts
+`~/devio/test/devio.test.ts`
 ```tsx
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
