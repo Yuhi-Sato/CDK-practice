@@ -94,7 +94,7 @@ CFn で作成したリソースを削除
 # 実践！AWS CDK #3 テスト
 
 参考 URL:  
-https://dev.classmethod.jp/articles/cdk-practice-3-test/
+https://dev.classmethod.jp/articles/cdk-practice-3-test/  
 https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.CfnVPC.html
 
 ### 手順
