@@ -94,3 +94,22 @@ CFn で作成したリソースを削除
 # 実践！AWS CDK #3 テスト
 
 参考 URL:https://dev.classmethod.jp/articles/cdk-practice-3-test/
+
+### 手順
+```
+> devio@0.1.0 build
+> tsc
+
+
+> devio@0.1.0 test
+> jest
+
+ PASS  test/devio.test.ts
+  ✓ SQS Queue Created (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        4.758 s
+Ran all test suites.
+```
