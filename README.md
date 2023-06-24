@@ -41,7 +41,7 @@ CFnで作成したリソースを削除
 参考URL
 https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
 
-'''tsx
+'''tsx  
 import * as cdk from '@aws-cdk/core';
 import { CfnVPC } from '@aws-cdk/aws-ec2';
 
