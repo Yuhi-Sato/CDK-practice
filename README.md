@@ -50,7 +50,7 @@ https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
 
 scopeの参照型が異なる？みたいでthisにエラーが起こっていたため、「〜/devio/node_modules/@aws-cdk/aws-ec2/core」ディレクトリを「~/devio/node_modules/@aws-cdk」直下に移動しました。  
 
-VPC CIDRブロックは「10.0.0.0/16」だと大きすぎる気がするので「10.0.0.0/19」に変更しました。
+「10.0.0.0/16」だと大きすぎる気がするので「10.0.0.0/19」に変更しました。
 
 ```tsx  
 import * as cdk from '@aws-cdk/core';
@@ -67,3 +67,6 @@ export class DevioStack extends cdk.Stack {
   }
 }
 ```
+
+# 実践！AWS CDK #3 テスト
+参考URLhttps://dev.classmethod.jp/articles/cdk-practice-3-test/
