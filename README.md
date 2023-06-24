@@ -96,6 +96,9 @@ CFn で作成したリソースを削除
 参考 URL:https://dev.classmethod.jp/articles/cdk-practice-3-test/
 
 ### 手順
+
+`npm run build && npm test`
+
 ```
 > devio@0.1.0 build
 > tsc
