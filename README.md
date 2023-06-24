@@ -208,7 +208,11 @@ https://dev.classmethod.jp/articles/cdk-practice-5-subnet/
 今回は以下の構成図を作っていきます
 ![Untitled Diagram (1)](https://github.com/Yuhi-Sato/CDK-practice/assets/91863685/556e613d-5038-4900-95dd-5ef420f856fd)
 
-
+`cdk.json`に以下を追記する
+```json
+"systemName": "devio",
+ "envType": "stg"
+```
 
 
 `~/devio/test/devio.test.ts`
