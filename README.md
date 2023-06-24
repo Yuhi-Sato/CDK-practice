@@ -51,7 +51,9 @@ CFn で作成したリソースを削除
 
 # 実践！AWS CDK #2 VPC
 
-参考 URL:https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
+参考 URL:
+https://dev.classmethod.jp/articles/cdk-practice-2-vpc/  
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.CfnVPC.html
 
 ### 学び
 
@@ -95,7 +97,7 @@ CFn で作成したリソースを削除
 
 参考 URL:  
 https://dev.classmethod.jp/articles/cdk-practice-3-test/  
-https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.CfnVPC.html
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html
 
 ### 手順
 
@@ -118,3 +120,5 @@ Snapshots:   0 total
 Time:        4.758 s
 Ran all test suites.
 ```
+
+```tsx
