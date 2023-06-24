@@ -2,10 +2,10 @@
 参考URL:https://dev.classmethod.jp/articles/cdk-practice-1-introduction/
 
 ### 手順
-CDKをインストール
+CDKをインストール  
 `npm install -g aws-cdk`  
 ディレクトリを作成し、移動  
-`mkdir devio && cd devio`
+`mkdir devio && cd devio`  
 
 CDK V2のままだとエラーが起こるため、バージョンを1.104.0に揃える  
 `npx aws-cdk@1.104.0 init app --language typescrip`
