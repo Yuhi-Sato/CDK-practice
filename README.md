@@ -100,7 +100,7 @@ https://dev.classmethod.jp/articles/cdk-practice-3-test/
 https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html
 
 ### 学び
-## Fine-grained assertions
+Fine-grained assertions  
 作成されるCFnのリソースについて以下をテストできる
 * リソースの存在→hasResource
 * リソースの数→resourceCountIs
