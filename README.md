@@ -229,9 +229,9 @@ export class DevioStack extends Stack {
     });
 
     // サブネットのCIDRブロックを定義
-    const CIDR = ['10.0.0.0/24', '10.0.0.1/24','10.0.0.2/24','10.0.0.3/24',
-    '10.0.0.4/24','10.0.0.5/24','10.0.0.6/24','10.0.0.7/24',
-    '10.0.0.8/24','10.0.0.9/24','10.0.0.10/24','10.0.0.11/24'];
+    const CIDR = ['10.0.0.0/24', '10.0.1.0/24','10.0.2.0/24','10.0.3.0/24',
+    '10.0.4.0/24','10.0.5.0/24','10.0.6.0/24','10.0.7.0/24',
+    '10.0.8.0/24','10.0.9.0/24','10.0.10.0/24','10.0.11.0/24'];
 
     // サブネットのAZを定義
     const AZ = ['ap-northeast-1a', 'ap-northeast-1c', 'ap-northeast-1d'];
@@ -293,6 +293,7 @@ export class DevioStack extends Stack {
 
   }
 }
+
 ```
 
 テストコード
@@ -310,14 +311,6 @@ test('Vpc', () => {
   });
     const stack = new Devio.DevioStack(app, 'DevioStack');
     const template = Template.fromStack(stack);
-
-    // サブネットのCIDRブロックを定義
-    const CIDR = ['10.0.0.0/24', '10.0.0.1/24','10.0.0.2/24','10.0.0.3/24',
-    '10.0.0.4/24','10.0.0.5/24','10.0.0.6/24','10.0.0.7/24',
-    '10.0.0.8/24','10.0.0.9/24','10.0.0.10/24','10.0.0.11/24'];
-
-    // サブネットのAZを定義
-    const AZ = ['ap-northeast-1a', 'ap-northeast-1c', 'ap-northeast-1d'];
   
     template.resourceCountIs('AWS::EC2::VPC', 1);
     template.resourceCountIs('AWS::EC2::Subnet', 9);
@@ -328,44 +321,45 @@ test('Vpc', () => {
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1a' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.1/24',
+        "CidrBlock": '10.0.1.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1c' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.2/24',
+        "CidrBlock": '10.0.2.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1d' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.4/24',
+        "CidrBlock": '10.0.4.0/24',
         "AvailabilityZone": 'ap-northeast-1a',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1a' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.5/24',
+        "CidrBlock": '10.0.5.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1c' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.6/24',
+        "CidrBlock": '10.0.6.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1d' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.8/24',
+        "CidrBlock": '10.0.8.0/24',
         "AvailabilityZone": 'ap-northeast-1a',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1a' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.9/24',
+        "CidrBlock": '10.0.9.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1c' }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
-        "CidrBlock": '10.0.0.10/24',
+        "CidrBlock": '10.0.10.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
         "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1d' }]
     });
 });
+
 ```
