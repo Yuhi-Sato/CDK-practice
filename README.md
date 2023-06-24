@@ -4,6 +4,7 @@
 ### 手順
 CDKをインストール  
 `npm install -g aws-cdk`  
+
 ディレクトリを作成し、移動  
 `mkdir devio && cd devio`  
 
