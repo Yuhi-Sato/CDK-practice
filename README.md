@@ -6,6 +6,7 @@
 
 `mkdir devio && cd devio`
 
+CDK V2のままだとエラーが起こるため、バージョンを1.104.0に揃える
 `npx aws-cdk@1.104.0 init app --language typescrip`
 
 ```tsx
