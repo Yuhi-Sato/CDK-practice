@@ -1,4 +1,5 @@
-# 実践！AWS CDK #1 導入(https://dev.classmethod.jp/articles/cdk-practice-1-introduction/)
+# 実践！AWS CDK #1 導入
+参考URL:https://dev.classmethod.jp/articles/cdk-practice-1-introduction/
 `npm install -g aws-cdk`
 
 `mkdir devio && cd devio`
