@@ -1,7 +1,7 @@
 # 実践！AWS CDK #1 導入
 参考URL:https://dev.classmethod.jp/articles/cdk-practice-1-introduction/
 
-# 学び
+### 学び
 * CDK上でプログラミング言語(今回はTypeScript)でCloudFormationのスタックを作成し、デプロイが可能
 * CDK上ではConstruct単位でコンポーネントを管理している
 * ConstructにはL1, L2, L3の3つのレイヤーがある
