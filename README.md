@@ -41,6 +41,17 @@ CFnで作成したリソースを削除
 参考URL
 https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
 
+### 学び
+* L1はL2よりもカスタマイズ性が高い
+* VPCリソースに対応するL1ConstructはCfnVPC
+
+
+### 手順
+
+scopeの参照型が異なる？みたいでthisにエラーが起こっていたため、「〜/devio/node_modules/@aws-cdk/aws-ec2/core」ディレクトリを「~/devio/node_modules/@aws-cdk」直下に移動しました。  
+
+VPC CIDRブロックは「10.0.0.0/16」だと大きすぎる気がするので「10.0.0.0/19」に変更しました。
+
 ```tsx  
 import * as cdk from '@aws-cdk/core';
 import { CfnVPC } from '@aws-cdk/aws-ec2';
