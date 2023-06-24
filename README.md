@@ -535,6 +535,8 @@ export class DevioStack extends Stack {
 `cd test/resource`   
 `touch vpc.test.ts subnet.test.ts`  
 
+以下がテストファイルになります
+
 `~/devio/test/resources/vpc.test.ts`  
 ```tsx
 import * as cdk from 'aws-cdk-lib';
@@ -625,4 +627,18 @@ test('Subnet', () => {
         "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1d` }]
     });
 });
+```
+
+テストを実行  
+
+`npm run build && npm test`
+```
+ PASS  test/devio.test.ts (6.744 s)
+ PASS  test/resources/vpc.test.ts (6.738 s)
+ PASS  test/resources/subnet.test.ts (6.745 s)
+
+Test Suites: 3 passed, 3 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        7.179 s
 ```
