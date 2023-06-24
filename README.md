@@ -38,8 +38,7 @@ CFnで作成したリソースを削除
 `cdk destroy`
 
 # 実践！AWS CDK #2 VPC
-参考URL
-https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
+参考URL:https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
 
 ### 学び
 * L1はL2よりもカスタマイズ性が高い
@@ -71,4 +70,4 @@ export class DevioStack extends cdk.Stack {
 cidrBlockは「10.0.0.0/16」だと大きすぎる気がするので「10.0.0.0/19」に変更しました。
 
 # 実践！AWS CDK #3 テスト
-参考URL　https://dev.classmethod.jp/articles/cdk-practice-3-test/
+参考URL:https://dev.classmethod.jp/articles/cdk-practice-3-test/
