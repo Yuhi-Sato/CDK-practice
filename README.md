@@ -36,3 +36,23 @@ CFnで定義したリソースをデプロイ
 
 CFnで作成したリソースを削除  
 `cdk destroy`
+
+# 実践！AWS CDK #2 VPC
+参考URL
+https://dev.classmethod.jp/articles/cdk-practice-2-vpc/
+
+'''tsx
+import * as cdk from '@aws-cdk/core';
+import { CfnVPC } from '@aws-cdk/aws-ec2';
+
+export class DevioStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    new CfnVPC(this, 'Vpc', {
+      cidrBlock: '10.0.0.0/19',
+      tags: [{ key: 'Name', value: 'devio-stg-vpc' }]
+    });
+  }
+}
+'''
