@@ -2,8 +2,9 @@
 参考URL:https://dev.classmethod.jp/articles/cdk-practice-1-introduction/
 
 ### 手順
-`npm install -g aws-cdk`
-
+CDKをインストール
+`npm install -g aws-cdk`  
+ディレクトリを作成し、移動  
 `mkdir devio && cd devio`
 
 CDK V2のままだとエラーが起こるため、バージョンを1.104.0に揃える  
@@ -21,9 +22,11 @@ export class DevioStack extends cdk.Stack {
   }
 }
 ```
-
+CFnのテンプレートを作成  
 `cdk synth`
 
+CFnで定義したリソースをデプロイ  
 `cdk deploy`
 
+CFnで作成したリソースを削除  
 `cdk destroy`
