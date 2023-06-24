@@ -22,8 +22,9 @@ CDK をインストール
 CDKのバージョンを確認する
 `cdk --version`
 
-バージョンがv2の場合、パッケージのインポート方法が異なるため注意(参考URLはv1)
+バージョンがv2の場合、パッケージのインポート方法が異なるため注意(参考URLはv1)　　
 
+~/devio/lib/devio-stack.ts
 ```tsx
 import { Stack, StackProps} from 'aws-cdk-lib'; // 変更
 import { Construct } from 'constructs'; // 変更
@@ -59,8 +60,8 @@ CFn で作成したリソースを削除
 
 ### 手順
 
-scope の参照型が異なる？みたいで this にエラーが起こっていたため、「〜/devio/node_modules/@aws-cdk/aws-ec2/core」ディレクトリを「~/devio/node_modules/@aws-cdk」直下に移動しました。
 
+~/devio/lib/devio-stack.ts
 ```tsx
 import { Stack, StackProps} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
@@ -80,6 +81,15 @@ export class DevioStack extends Stack {
 ```
 
 cidrBlock は「10.0.0.0/16」だと大きすぎる気がするので「10.0.0.0/19」に変更しました。
+
+CFn のテンプレートを作成  
+`cdk synth`
+
+CFn で定義したリソースをデプロイ  
+`cdk deploy`
+
+CFn で作成したリソースを削除  
+`cdk destroy`
 
 # 実践！AWS CDK #3 テスト
 
