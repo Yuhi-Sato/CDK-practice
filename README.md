@@ -214,7 +214,6 @@ https://dev.classmethod.jp/articles/cdk-practice-5-subnet/
 "envType": "stg"
 ```
 
-
 `~/devio/test/devio.test.ts`
 ```tsx
 import { Stack, StackProps} from 'aws-cdk-lib';
@@ -302,11 +301,19 @@ export class DevioStack extends Stack {
 
 ```
 
+テスト用に環境変数を定義するモジュールを作成
+`~/devio/test/env.ts`
+```tsx
+export const systemName = "devio";
+export const envType = "stg";
+```
+
 テストコード
 ```tsx
 import * as cdk from 'aws-cdk-lib';
 import { Match,Template } from 'aws-cdk-lib/assertions';
 import * as Devio from '../lib/devio-stack';
+import {systemName,envType} from './env';
 
 test('Vpc', () => {
     const app = new cdk.App({
@@ -324,48 +331,47 @@ test('Vpc', () => {
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.0.0/24',
         "AvailabilityZone": 'ap-northeast-1a',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1a' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1a` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.1.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1c' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1c` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.2.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-public-subnet-1d' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-public-subnet-1d` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.4.0/24',
         "AvailabilityZone": 'ap-northeast-1a',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1a' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1a` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.5.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1c' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1c` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.6.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-protected-subnet-1d' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-protected-subnet-1d` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.8.0/24',
         "AvailabilityZone": 'ap-northeast-1a',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1a' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1a` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.9.0/24',
         "AvailabilityZone": 'ap-northeast-1c',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1c' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1c` }]
     });
     template.hasResourceProperties('AWS::EC2::Subnet', {
         "CidrBlock": '10.0.10.0/24',
         "AvailabilityZone": 'ap-northeast-1d',
-        "Tags": [{ 'Key': 'Name', 'Value': 'devio-stg-private-subnet-1d' }]
+        "Tags": [{ 'Key': 'Name', 'Value': `${systemName}-${envType}-private-subnet-1d` }]
     });
 });
-
 ```
