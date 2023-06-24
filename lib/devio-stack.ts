@@ -1,6 +1,6 @@
 import { Stack, StackProps} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { CfnVPC } from 'aws-cdk-lib/aws-ec2'; // <- 追加
+import { CfnVPC } from 'aws-cdk-lib/aws-ec2';
 
 export class DevioStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
