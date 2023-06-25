@@ -9,7 +9,7 @@ test('Subnet', () => {
           'systemName': 'devio',
           'envType': 'stg'
       }
-  });
+    });
     const stack = new Devio.DevioStack(app, 'DevioStack');
     const template = Template.fromStack(stack);
   
