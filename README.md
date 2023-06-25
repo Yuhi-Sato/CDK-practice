@@ -673,7 +673,7 @@ abstract class University {
 class EngineeringFaculty extends University{
     // 抽象メソッドを実装
     describe(this: University){
-        console.log(`Unibersity　Engineering　Faculty ${this.id}: ${this.studentname})`)
+        console.log(`University　Engineering　Faculty ${this.id}: ${this.studentname})`)
     }
 }
 ```
