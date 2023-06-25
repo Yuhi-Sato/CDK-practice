@@ -645,6 +645,7 @@ Time:        7.179 s
 
 # 実践！AWS CDK #8 抽象化
 参考URL:
+
 https://dev.classmethod.jp/articles/cdk-practice-8-abstraction/  
 https://www.udemy.com/share/103eLk3@WGNxUIYac5fZVlBol7xVVvqzzOOPGUVy-4JlnLijVdzJcjJURtFrdV1vWi7X2lbelw==/  
 
@@ -826,7 +827,8 @@ export class Subnet extends Resource {
 ```
 
 # 実践！AWS CDK #11,#12,#13
-参考URL:　　　
+参考URL:
+
 https://dev.classmethod.jp/articles/cdk-practice-10-internet-gateway/  
 https://dev.classmethod.jp/articles/cdk-practice-11-elastic-ip/  
 https://dev.classmethod.jp/articles/cdk-practice-12-nat-gateway/  
