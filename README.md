@@ -642,3 +642,38 @@ Tests:       3 passed, 3 total
 Snapshots:   0 total
 Time:        7.179 s
 ```
+
+# 実践！AWS CDK #8 抽象化
+参考URL:
+https://dev.classmethod.jp/articles/cdk-practice-8-abstraction/  
+https://www.udemy.com/share/103eLk3@WGNxUIYac5fZVlBol7xVVvqzzOOPGUVy-4JlnLijVdzJcjJURtFrdV1vWi7X2lbelw==/  
+
+### 学び
+* 抽象クラス、抽象メソッドを定義すると子クラスは抽象メソッドのオーバーライドを強制される
+* 抽象クラスを利用して、リソースのクラスの共通部分を作成する
+
+### 抽象クラスとは
+
+抽象クラスとはクラス継承を前提としたクラスであり、インスタンス化することができません。
+
+抽象クラス内で抽象メソッドを定義することで、継承先のクラスでオーバーライドを強要することができます。
+
+以下は抽象クラスUniversityを継承する様子です。
+
+```tsx
+// 抽象クラス
+abstract class University {
+    constructor(public id: string, public studentname: string){}
+    // 抽象メソッドを定義
+    // ここではメソッドの実装はできず、代わりに返り値の型を示す
+    abstract describe(this: University): void
+}
+
+// Universityクラスを継承
+class EngineeringFaculty extends University{
+    // 抽象メソッドを実装
+    describe(this: University){
+        console.log(`Unibersity　Engineering　Faculty ${this.id}: ${this.studentname})`)
+    }
+}
+```
