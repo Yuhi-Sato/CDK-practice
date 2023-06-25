@@ -826,7 +826,7 @@ export class Subnet extends Resource {
 ```
 
 # 実践！AWS CDK #11,#12,#13
-参考URL:　　
+参考URL:　　　
 https://dev.classmethod.jp/articles/cdk-practice-10-internet-gateway/  
 https://dev.classmethod.jp/articles/cdk-practice-11-elastic-ip/  
 https://dev.classmethod.jp/articles/cdk-practice-12-nat-gateway/  
