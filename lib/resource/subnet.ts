@@ -1,8 +1,8 @@
-import { Stack, StackProps} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CfnVPC,CfnSubnet } from 'aws-cdk-lib/aws-ec2';
+import { Resource } from './abstract/resource';
 
-export class Subnet {
+export class Subnet extends Resource {
     public PublicSubnetA: CfnSubnet;
     public PublicSubnetC: CfnSubnet;
     public PublicSubnetD: CfnSubnet;
@@ -16,6 +16,7 @@ export class Subnet {
     private readonly vpc: CfnVPC;
 
     constructor(vpc: CfnVPC) {
+        super();
         this.vpc = vpc;
     };
 
