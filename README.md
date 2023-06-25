@@ -824,3 +824,5 @@ export class Subnet extends Resource {
     }
 }
 ```
+
+# 実践！AWS CDK #11,#12,#13
