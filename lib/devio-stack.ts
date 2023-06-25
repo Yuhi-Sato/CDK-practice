@@ -41,7 +41,7 @@ export class DevioStack extends Stack {
       subnet.ProtectedSubnetC,
       subnet.ProtectedSubnetD,
       internetGateway.igw,
-     natGateway.ngw1a);
-    routeTable.createResources(this);
+      natGateway.ngw1a);
+      routeTable.createResources(this);
   }
 }
